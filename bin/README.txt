@@ -1,0 +1,1 @@
+Install FFMPEG. lalu pindahkan isi folder bin ke dalam folder ini
