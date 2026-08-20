@@ -356,13 +356,6 @@ Smart Video Patcher membutuhkan:
 - FFmpeg
 - FFprobe
 
-Tidak diperlukan:
-
-- Node.js
-- Python
-- npm
-- Video editor tambahan
-
 ---
 
 # Installation
@@ -370,13 +363,10 @@ Tidak diperlukan:
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/USERNAME/REPOSITORY.git
-cd REPOSITORY
+git clone https://github.com/plafound/smart-video-patcher.git
+cd smart-video-patcher
 ```
 
-Ganti `USERNAME` dan `REPOSITORY` dengan akun dan nama repository GitHub kamu.
-
----
 
 ## 2. Install FFmpeg
 
@@ -405,12 +395,7 @@ bin/
 
 tetapi file binary FFmpeg **tidak disertakan**.
 
-Masukkan:
-
-```text
-ffmpeg.exe
-ffprobe.exe
-```
+Masukkan: Semua file di dalam folder bin FFMPEG
 
 ke:
 
@@ -424,39 +409,20 @@ Struktur minimal:
 SmartVideoPatcher/
 ├── bin/
 │   ├── ffmpeg.exe
-│   └── ffprobe.exe
+│   ├── ffprobe.exe
+│   ├── avcodec-*.dll
+│   ├── avdevice-*.dll
+│   ├── avfilter-*.dll
+│   ├── avformat-*.dll
+│   ├── avutil-*.dll
+│   ├── swresample-*.dll
+│   └── swscale-*.dll
 ├── input/
 ├── output/
-├── SmartVideoPatcher.ps1
+├── patcher.ps1
+├── patcher.bat
 └── README.md
 ```
-
-### DLL FFmpeg
-
-Jika build FFmpeg yang digunakan membutuhkan DLL tambahan, seluruh DLL yang diperlukan harus tetap berada bersama `ffmpeg.exe`.
-
-Contoh:
-
-```text
-bin/
-├── ffmpeg.exe
-├── ffprobe.exe
-├── avcodec-*.dll
-├── avdevice-*.dll
-├── avfilter-*.dll
-├── avformat-*.dll
-├── avutil-*.dll
-├── swresample-*.dll
-└── swscale-*.dll
-```
-
-Hal ini penting untuk menghindari error seperti:
-
-```text
-The code execution cannot proceed because avformat-*.dll was not found
-```
-
----
 
 ## 4. Masukkan Video
 
@@ -470,7 +436,7 @@ Contoh:
 
 ```text
 input/
-└── IMG_6998.MOV
+└── video.MOV
 ```
 
 ---
@@ -487,27 +453,15 @@ Contoh:
 
 ```text
 output/
-├── IMG_6998_READY.mp4
-└── IMG_6998_REPORT.txt
+├── video_READY.mp4
+└── video_REPORT.txt
 ```
 
 ---
 
 # Running
 
-Jalankan PowerShell dari folder project:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\SmartVideoPatcher.ps1
-```
-
-Atau:
-
-```powershell
-.\SmartVideoPatcher.ps1
-```
-
-Program sengaja berjalan melalui PowerShell/CMD agar proses FFmpeg dan error dapat dilihat secara langsung.
+Jalankan file patch.bat dari folder project
 
 ---
 
@@ -671,7 +625,8 @@ SmartVideoPatcher/
 ├── output/
 │   └── .gitkeep
 │
-├── SmartVideoPatcher.ps1
+├── patcher.ps1
+├── patcher.bat
 ├── README.md
 └── .gitignore
 ```
@@ -684,14 +639,15 @@ SmartVideoPatcher/
 ├── bin/
 │   ├── ffmpeg.exe
 │   ├── ffprobe.exe
-│   └── [FFmpeg DLL files jika diperlukan]
+│   └── dan FFmpeg DLL files
 │
 ├── input/
 │   └── video.MOV
 │
 ├── output/
 │
-├── SmartVideoPatcher.ps1
+├── patcher.ps1
+├── patcher.bat
 ├── README.md
 └── .gitignore
 ```
@@ -716,35 +672,6 @@ Pengguna harus mengunduh FFmpeg sendiri dan menempatkan binary yang diperlukan d
 ```text
 bin/
 ```
-
----
-
-# `.gitignore`
-
-Disarankan menggunakan:
-
-```gitignore
-bin/ffmpeg.exe
-bin/ffprobe.exe
-
-*.dll
-
-output/*
-!output/.gitkeep
-
-input/*
-!input/.gitkeep
-```
-
-Dengan konfigurasi tersebut:
-
-- Binary FFmpeg tidak ikut ter-upload
-- DLL FFmpeg tidak ikut ter-upload
-- Video input tidak ikut ter-upload
-- Video output tidak ikut ter-upload
-
----
-
 # Recommended Workflow
 
 Untuk video HDR dari smartphone seperti iPhone atau perangkat Android modern:
@@ -894,16 +821,6 @@ Jangan hanya mengambil `ffmpeg.exe` dan `ffprobe.exe` jika build tersebut membut
 
 ---
 
-## PowerShell tidak mengizinkan script
-
-Jika muncul error mengenai execution policy:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\SmartVideoPatcher.ps1
-```
-
----
-
 ## Tidak ada video ditemukan
 
 Pastikan video berada di:
@@ -926,23 +843,6 @@ Format yang didukung:
 
 ---
 
-## Transcode gagal
-
-Jangan langsung menutup jendela PowerShell.
-
-Perhatikan pesan error FFmpeg yang muncul di console.
-
-Pesan tersebut biasanya dapat menunjukkan:
-
-- Filter tidak didukung
-- Codec tidak tersedia
-- DLL tidak lengkap
-- Format input bermasalah
-- Masalah metadata
-- Masalah encoder
-- Masalah filter HDR
-
----
 
 # Credits
 
@@ -983,8 +883,8 @@ A lightweight local video preprocessing tool designed for preparing videos befor
 ### 1. Clone repository
 
 ```bash
-git clone https://github.com/USERNAME/REPOSITORY.git
-cd REPOSITORY
+git clone https://github.com/plafound/smart-video-patcher.git
+cd smart-video-patcher
 ```
 
 ### 2. Download FFmpeg
@@ -1011,9 +911,7 @@ input/
 
 ### 5. Jalankan
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\SmartVideoPatcher.ps1
-```
+klik 2x pada file patch.bat
 
 ### 6. Pilih HDR mode
 
